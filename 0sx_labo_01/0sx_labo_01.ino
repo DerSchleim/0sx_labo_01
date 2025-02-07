@@ -6,6 +6,15 @@
     Serial.begin(9600);
     pinMode(ledPin, OUTPUT);
   }
+
+  void loop() {
+    Allume();
+    Blink();
+    Variation();
+    Eteint();
+  }
+
+
   void Allume() {
     Serial.println("Allume – 6202142");
     digitalWrite(ledPin, !ledState);
@@ -13,12 +22,13 @@
   }
 
   void Blink() {
+    static int t = 250;
     Serial.println("Clignotement – 6202142");
     for (int i = 0; i < 3; i++) {
       digitalWrite(ledPin, ledState);
-      delay(250);
+      delay(t);
       digitalWrite(ledPin, !ledState);
-      delay(250);
+      delay(t);
     }
   }
 
@@ -39,12 +49,4 @@
     Serial.println("Eteint – 6202142");
     digitalWrite(ledPin, ledState);
     delay(arret);
-  }
-
-
-  void loop() {
-    Allume();
-    Blink();
-    Variation();
-    Eteint();
   }
